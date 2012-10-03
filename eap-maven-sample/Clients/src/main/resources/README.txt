@@ -1,0 +1,1 @@
+The IBM MQ clients require MQ clients jars.
