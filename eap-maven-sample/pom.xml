@@ -285,5 +285,6 @@
 	</build>
 	<modules>
 		<module>Clients</module>
+		<module>EJB</module>
 	</modules>
 </project>
