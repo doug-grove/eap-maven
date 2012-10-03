@@ -47,6 +47,23 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			
+			<!-- IBM MQ - See README.txt in the Clients resources folder -->
+			<dependency>
+			  	<groupId>com.ibm.mq</groupId>
+       			<artifactId>com.ibm.mq</artifactId>
+  				<version>6.0.2.10</version>
+  			</dependency>
+			<dependency>
+			  	<groupId>com.ibm.mq</groupId>
+       			<artifactId>com.ibm.mq.connector</artifactId>
+  				<version>6.0.2.10</version>
+  			</dependency>
+			<dependency>
+			  	<groupId>com.ibm.mq</groupId>
+       			<artifactId>com.ibm.mq.jta</artifactId>
+  				<version>6.0.2.10</version>
+  			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

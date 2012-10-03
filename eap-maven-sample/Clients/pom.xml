@@ -1,15 +1,34 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <artifactId>eap6-maven</artifactId>
-    <groupId>org.jboss.sample</groupId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<artifactId>eap6-maven</artifactId>
+		<groupId>org.jboss.sample</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
 
-  <groupId>org.jboss.sample</groupId>
-  <artifactId>Clients</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <name>Clients</name>
+	<groupId>org.jboss.sample</groupId>
+	<artifactId>Clients</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>Clients</name>
 
+	<dependencies>
+		<!-- IBM MQ - See README.txt in the Clients resources folder -->
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>com.ibm.mq</artifactId>
+			<version>6.0.2.10</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>com.ibm.mq.connector</artifactId>
+			<version>6.0.2.10</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>com.ibm.mq.jta</artifactId>
+			<version>6.0.2.10</version>
+		</dependency>
+	</dependencies>
 </project>
