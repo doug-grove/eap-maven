@@ -48,6 +48,21 @@
 				<scope>import</scope>
 			</dependency>
 			
+			<!-- The JEE JMS API -->
+			<dependency>
+     			<groupId>org.jboss.javaee</groupId>
+     			<artifactId>jboss-jms-api</artifactId>
+     			<version>1.1.0.GA</version>
+				<scope>provided</scope>
+			</dependency>
+			
+			<!-- Logging is nice to have -->
+			<dependency>
+				<groupId>org.jboss.logging</groupId>
+				<artifactId>jboss-logging</artifactId>
+				<version>3.1.2.GA</version>
+			</dependency>
+			
 			<!-- IBM MQ - See README.txt in the Clients resources folder -->
 			<dependency>
 			  	<groupId>com.ibm.mq</groupId>
@@ -71,40 +86,35 @@
 		<!-- First declare the APIs we depend on and need for compilation. All 
 			of them are provided by JBoss AS 7 -->
 
-		<!-- Import the CDI API, we use provided scope as the API is included in 
-			JBoss AS 7 -->
+		<!-- Import the CDI API, we use provided scope as the API is included in JBoss AS 7 -->
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the Common Annotations API (JSR-250), we use provided scope 
-			as the API is included in JBoss AS 7 -->
+		<!-- Import the Common Annotations API (JSR-250), we use provided scope as the API is included in JBoss AS 7 -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.annotation</groupId>
 			<artifactId>jboss-annotations-api_1.1_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the JAX-RS API, we use provided scope as the API is included 
-			in JBoss AS 7 -->
+		<!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss AS 7 -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.ws.rs</groupId>
 			<artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the JPA API, we use provided scope as the API is included in 
-			JBoss AS 7 -->
+		<!-- Import the JPA API, we use provided scope as the API is included in JBoss AS 7 -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the EJB API, we use provided scope as the API is included in 
-			JBoss AS 7 -->
+		<!-- Import the EJB API, we use provided scope as the API is included in JBoss AS 7 -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.ejb</groupId>
 			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
@@ -168,6 +178,12 @@
 			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

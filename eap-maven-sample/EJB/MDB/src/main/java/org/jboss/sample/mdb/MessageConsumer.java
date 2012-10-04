@@ -19,8 +19,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.jboss.logging.Logger;
 
 /**
  * @author grovedc
@@ -35,8 +34,7 @@ import org.apache.commons.logging.LogFactory;
 	@ActivationConfigProperty(propertyName = "messagingType", propertyValue = "javax.jms.MessageListener"),
 	@ActivationConfigProperty(propertyName = "Destination", propertyValue = "/queue/wmqQueueSsl") })
 public class MessageConsumer implements MessageListener {
-	/** Logger for the class. */
-	private static final Log logger = LogFactory.getLog(MessageConsumer.class);
+	private static final Logger logger = Logger.getLogger(MessageConsumer.class);
 	
 	/* (non-Javadoc)
 	 * @see javax.jms.MessageListener#onMessage(javax.jms.Message)
