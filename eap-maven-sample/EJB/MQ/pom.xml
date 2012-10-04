@@ -14,4 +14,16 @@
 	<packaging>ejb</packaging>
 	<name>IBM MQ</name>
 	<description>IBM MQ Sample MDBs</description>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.jboss.javaee</groupId>
+			<artifactId>jboss-jms-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.ejb3</groupId>
+			<artifactId>jboss-ejb3-ext-api</artifactId>
+		</dependency>
+	</dependencies>
+	
 </project>
