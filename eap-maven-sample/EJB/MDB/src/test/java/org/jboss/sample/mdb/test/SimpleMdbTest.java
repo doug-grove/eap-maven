@@ -24,4 +24,5 @@ public class SimpleMdbTest {
     public void should_create_greeting() {
         Assert.fail("Not yet implemented");
     }
+   
 }
