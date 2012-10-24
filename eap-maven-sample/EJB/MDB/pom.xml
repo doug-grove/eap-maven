@@ -14,12 +14,5 @@
 	<packaging>ejb</packaging>
 	<name>MDB Samples</name>
 	<description>Demo MDBs</description>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.jboss.javaee</groupId>
-			<artifactId>jboss-jms-api</artifactId>
-		</dependency>
-	</dependencies>
 	
 </project>

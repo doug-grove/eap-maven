@@ -14,6 +14,19 @@
 	<packaging>pom</packaging>
 	<name>Parent Project for EJBs</name>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.jboss.javaee</groupId>
+			<artifactId>jboss-jms-api</artifactId>
+		</dependency>
+		
+		<dependency>
+  			<groupId>org.jboss.ejb3</groupId>
+  			<artifactId>jboss-ejb3-ext-api</artifactId>
+  			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
+
 	<modules>
 		<module>MQ</module>
 		<module>MDB</module>
