@@ -302,6 +302,5 @@
 	<modules>
 		<module>Clients</module>
 		<module>EJB</module>
-		<module>WAR</module>
 	</modules>
 </project>
