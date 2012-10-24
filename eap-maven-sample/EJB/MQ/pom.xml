@@ -10,7 +10,6 @@
 
 	<groupId>org.jboss.sample.ejb.mq</groupId>
 	<artifactId>MQ</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>ejb</packaging>
 	<name>IBM MQ</name>
 	<description>IBM MQ Sample MDBs</description>
