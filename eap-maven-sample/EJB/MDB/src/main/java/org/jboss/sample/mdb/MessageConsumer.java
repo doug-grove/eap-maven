@@ -1,5 +1,5 @@
 /**
- * SimpleMDB.java
+ * MessageConsumer.java
  * 
  * Created on Mar 19, 2011, 3:04:11 PM
  *
@@ -25,7 +25,7 @@ import org.jboss.logging.Logger;
  * @author grovedc
  * 
  */
-@MessageDriven(name="SimpleMDB", activationConfig = {
+@MessageDriven(name="ConsumerMDB", activationConfig = {
 //	@ActivationConfigProperty(propertyName = "providerAdapterJNDI", propertyValue="java:/RemoteJMSProvider"),
 //  @ActivationConfigProperty(propertyName="reconnectAttempts", propertyValue="60"),
 //  @ActivationConfigProperty(propertyName="reconnectInterval", propertyValue="10"),
@@ -33,8 +33,8 @@ import org.jboss.logging.Logger;
 	@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
 	@ActivationConfigProperty(propertyName = "messagingType", propertyValue = "javax.jms.MessageListener"),
 	@ActivationConfigProperty(propertyName = "Destination", propertyValue = "/queue/wmqQueueSsl") })
-public class SimpleMDB implements MessageListener {
-	private static final Logger logger = Logger.getLogger(SimpleMDB.class);
+public class MessageConsumer implements MessageListener {
+	private static final Logger logger = Logger.getLogger(MessageConsumer.class);
 	
 	/* (non-Javadoc)
 	 * @see javax.jms.MessageListener#onMessage(javax.jms.Message)

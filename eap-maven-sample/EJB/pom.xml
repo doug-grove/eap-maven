@@ -8,7 +8,9 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
+	<groupId>org.jboss.sample</groupId>
 	<artifactId>EJB</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Parent Project for EJBs</name>
 
