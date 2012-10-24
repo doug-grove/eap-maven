@@ -1,0 +1,62 @@
+wget 127.0.0.1:8080/REST/queues/jms.queue.testQueue
+
+produces:
+
+<queue>
+	<name>jms.queue.testQueue</name>
+	<atom:link rel="create" href="http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/create"/>
+	<atom:link rel="create-with-id" href="http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/create/{id}"/>
+	<atom:link rel="pull-consumers" href="http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/pull-consumers"/>
+	<atom:link rel="push-consumers" href="http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/push-consumers"/>
+</queue>
+
+
+wget --post-data "hello world" http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/create
+
+--2012-10-24 14:49:44--  http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/create
+Connecting to 127.0.0.1:8080... connected.
+HTTP request sent, awaiting response... 201 Created
+Length: 0
+Saving to: `create'
+
+    [ <=>                                                                                                                          ] 0           --.-K/s   in 0s      
+
+2012-10-24 14:49:44 (0.00 B/s) - `create' saved [0/0]
+
+
+
+wget --post-data "" http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/pull-consumers
+
+--2012-10-24 14:56:20--  http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/pull-consumers
+Connecting to 127.0.0.1:8080... connected.
+HTTP request sent, awaiting response... 201 Created
+Length: 0
+Saving to: `pull-consumers'
+
+    [ <=>                                                                                                                          ] 0           --.-K/s   in 0s      
+
+2012-10-24 14:56:20 (0.00 B/s) - `pull-consumers' saved [0/0]
+
+
+wget -v --post-data "" http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/pull-consumers/attributes-0/4-queue-jms.queue.testQueue-1351102355647/consume-next-1
+
+wget -S --post-data "" http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/pull-consumers
+--2012-10-24 15:21:21--  http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/pull-consumers
+Connecting to 127.0.0.1:8080... connected.
+HTTP request sent, awaiting response... 
+  HTTP/1.1 201 Created
+  Server: Apache-Coyote/1.1
+  msg-consume-next: http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/pull-consumers/attributes-0/5-queue-jms.queue.testQueue-1351102355647/consume-next-1
+  Location: http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/pull-consumers/attributes-0/5-queue-jms.queue.testQueue-1351102355647
+  msg-consume-next-type: application/x-www-form-urlencoded
+  Content-Length: 0
+  Date: Wed, 24 Oct 2012 19:21:21 GMT
+  Connection: keep-alive
+Length: 0
+Saving to: `pull-consumers'
+
+    [ <=>                                                                                                                          ] 0           --.-K/s   in 0s      
+
+2012-10-24 15:21:21 (0.00 B/s) - `pull-consumers' saved [0/0]
+
+
