@@ -63,7 +63,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<!-- stop mangling jar names with versions.... -->   
+					<!-- stop mangling jar names with versions.... -->
 				    <outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>
 					<archive>
 						<manifestEntries>
@@ -74,5 +74,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
