@@ -19,20 +19,22 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
+import org.jboss.ejb3.annotation.ResourceAdapter;
 import org.jboss.logging.Logger;
 
 /**
  * @author grovedc
  * 
  */
-@MessageDriven(name="ConsumerMDB", activationConfig = {
+@MessageDriven(name="MessageConsumer", activationConfig = {
 //	@ActivationConfigProperty(propertyName = "providerAdapterJNDI", propertyValue="java:/RemoteJMSProvider"),
 //  @ActivationConfigProperty(propertyName="reconnectAttempts", propertyValue="60"),
 //  @ActivationConfigProperty(propertyName="reconnectInterval", propertyValue="10"),
 
+//	@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),		
 	@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-	@ActivationConfigProperty(propertyName = "messagingType", propertyValue = "javax.jms.MessageListener"),
-	@ActivationConfigProperty(propertyName = "Destination", propertyValue = "/queue/wmqQueueSsl") })
+	@ActivationConfigProperty(propertyName = "destination", propertyValue = "jms/testQueue") })
+@ResourceAdapter("hornetq-ra")
 public class MessageConsumer implements MessageListener {
 	private static final Logger logger = Logger.getLogger(MessageConsumer.class);
 	

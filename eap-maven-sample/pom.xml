@@ -79,6 +79,29 @@
 				<artifactId>com.ibm.mq.jta</artifactId>
 				<version>6.0.2.10</version>
 			</dependency>
+			
+			<!-- Client dependencies -->
+			<dependency>
+      			<groupId>org.jboss.as</groupId>
+      			<artifactId>jboss-as-ejb-client-bom</artifactId>
+      			<version>7.1.2.Final</version>
+      			<type>pom</type>
+  			</dependency>
+  			<dependency>
+        		<groupId>org.hornetq</groupId>
+        		<artifactId>hornetq-core-client</artifactId>
+        		<version>2.2.18.Final</version>
+    		</dependency>
+    		<dependency>
+        		<groupId>org.hornetq</groupId>
+        		<artifactId>hornetq-jms-client</artifactId>
+        		<version>2.2.18.Final</version>
+    		</dependency>
+    		<dependency>
+        		<groupId>org.jboss.netty</groupId>
+        		<artifactId>netty</artifactId>
+        		<version>3.2.7.Final</version>
+    		</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -329,6 +352,8 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<!-- Modules -->
 	<modules>
 		<module>Clients</module>
 		<module>EJB</module>
