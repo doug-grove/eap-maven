@@ -28,7 +28,7 @@
 		<maven.version>3.0.0</maven.version>
 	</properties>
 
- 	<prerequisites>
+	<prerequisites>
 		<maven>3.0.0</maven>
 	</prerequisites>
 
@@ -47,45 +47,61 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			
+
 			<!-- The JEE JMS API -->
 			<dependency>
-     			<groupId>org.jboss.javaee</groupId>
-     			<artifactId>jboss-jms-api</artifactId>
-     			<version>1.1.0.GA</version>
+				<groupId>org.jboss.javaee</groupId>
+				<artifactId>jboss-jms-api</artifactId>
+				<version>1.1.0.GA</version>
 				<scope>provided</scope>
 			</dependency>
-			
-			<!-- JBoss specific annotations -->
-			<dependency>
-				<groupId>org.jboss.ejb3</groupId>
-				<artifactId>jboss-ejb3-ext-api</artifactId>
-				<version>2.0.0</version>
-			</dependency>
-			
+
 			<!-- Logging is nice to have -->
 			<dependency>
 				<groupId>org.jboss.logging</groupId>
 				<artifactId>jboss-logging</artifactId>
 				<version>3.1.2.GA</version>
 			</dependency>
-			
+
 			<!-- IBM MQ - See README.txt in the Clients resources folder -->
 			<dependency>
-			  	<groupId>com.ibm.mq</groupId>
-       			<artifactId>com.ibm.mq</artifactId>
-  				<version>6.0.2.10</version>
-  			</dependency>
+				<groupId>com.ibm.mq</groupId>
+				<artifactId>com.ibm.mq</artifactId>
+				<version>6.0.2.10</version>
+			</dependency>
 			<dependency>
-			  	<groupId>com.ibm.mq</groupId>
-       			<artifactId>com.ibm.mq.connector</artifactId>
-  				<version>6.0.2.10</version>
-  			</dependency>
+				<groupId>com.ibm.mq</groupId>
+				<artifactId>com.ibm.mq.connector</artifactId>
+				<version>6.0.2.10</version>
+			</dependency>
 			<dependency>
-			  	<groupId>com.ibm.mq</groupId>
-       			<artifactId>com.ibm.mq.jta</artifactId>
-  				<version>6.0.2.10</version>
+				<groupId>com.ibm.mq</groupId>
+				<artifactId>com.ibm.mq.jta</artifactId>
+				<version>6.0.2.10</version>
+			</dependency>
+			
+			<!-- Client dependencies -->
+			<dependency>
+      			<groupId>org.jboss.as</groupId>
+      			<artifactId>jboss-as-ejb-client-bom</artifactId>
+      			<version>7.1.2.Final</version>
+      			<type>pom</type>
   			</dependency>
+  			<dependency>
+        		<groupId>org.hornetq</groupId>
+        		<artifactId>hornetq-core-client</artifactId>
+        		<version>2.2.18.Final</version>
+    		</dependency>
+    		<dependency>
+        		<groupId>org.hornetq</groupId>
+        		<artifactId>hornetq-jms-client</artifactId>
+        		<version>2.2.18.Final</version>
+    		</dependency>
+    		<dependency>
+        		<groupId>org.jboss.netty</groupId>
+        		<artifactId>netty</artifactId>
+        		<version>3.2.7.Final</version>
+    		</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -93,35 +109,40 @@
 		<!-- First declare the APIs we depend on and need for compilation. All 
 			of them are provided by JBoss AS 7 -->
 
-		<!-- Import the CDI API, we use provided scope as the API is included in JBoss AS 7 -->
+		<!-- Import the CDI API, we use provided scope as the API is included in 
+			JBoss AS 7 -->
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the Common Annotations API (JSR-250), we use provided scope as the API is included in JBoss AS 7 -->
+		<!-- Import the Common Annotations API (JSR-250), we use provided scope 
+			as the API is included in JBoss AS 7 -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.annotation</groupId>
 			<artifactId>jboss-annotations-api_1.1_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss AS 7 -->
+		<!-- Import the JAX-RS API, we use provided scope as the API is included 
+			in JBoss AS 7 -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.ws.rs</groupId>
 			<artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the JPA API, we use provided scope as the API is included in JBoss AS 7 -->
+		<!-- Import the JPA API, we use provided scope as the API is included in 
+			JBoss AS 7 -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the EJB API, we use provided scope as the API is included in JBoss AS 7 -->
+		<!-- Import the EJB API, we use provided scope as the API is included in 
+			JBoss AS 7 -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.ejb</groupId>
 			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
@@ -249,8 +270,34 @@
 					<artifactId>maven-ejb-plugin</artifactId>
 					<version>2.3</version>
 					<configuration>
-						<enforceDeploymentDescriptor>false</enforceDeploymentDescriptor>
+						<enforceDeploymentDescriptor>false
+						</enforceDeploymentDescriptor>
 						<ejbVersion>3.0</ejbVersion>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-enforcer-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>enforce</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -280,32 +327,36 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- the versions plugin can be used to check for new plugin or dependency versions -->
-		    <!-- mvn versions:display-plugin-updates -->
-		    <!-- mvn versions:display-dependency-updates -->
+			<!-- the versions plugin can be used to check for new plugin or dependency 
+				versions -->
+			<!-- mvn versions:display-plugin-updates -->
+			<!-- mvn versions:display-dependency-updates -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
 				<version>1.3.1</version>
 			</plugin>
-	        <plugin>
-            	<artifactId>maven-war-plugin</artifactId>
-            	<configuration>
-               		<!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
-               		<failOnMissingWebXml>false</failOnMissingWebXml>
-            	</configuration>
-	        </plugin>
-         	<!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
-         	<!-- To use, run: mvn package jboss-as:deploy -->
-         	<plugin>
-            	<groupId>org.jboss.as.plugins</groupId>
-            	<artifactId>jboss-as-maven-plugin</artifactId>
-            	<version>7.1.2.Final</version>
-         	</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
+			<!-- To use, run: mvn package jboss-as:deploy -->
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>7.1.2.Final</version>
+			</plugin>
 		</plugins>
 	</build>
+
+	<!-- Modules -->
 	<modules>
 		<module>Clients</module>
 		<module>EJB</module>
+		<module>WAR</module>
 	</modules>
 </project>

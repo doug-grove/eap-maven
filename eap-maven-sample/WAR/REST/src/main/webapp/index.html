@@ -1,0 +1,28 @@
+REST Notes
+
+wget 127.0.0.1:8080/REST/queues/jms.queue.testQueue
+
+produces:
+
+<queue>
+	<name>jms.queue.testQueue</name>
+	<atom:link rel="create" href="http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/create"/>
+	<atom:link rel="create-with-id" href="http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/create/{id}"/>
+	<atom:link rel="pull-consumers" href="http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/pull-consumers"/>
+	<atom:link rel="push-consumers" href="http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/push-consumers"/>
+</queue>
+
+
+wget --post-data "hello world" http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/create
+
+produces:
+
+--2012-10-24 14:49:44--  http://127.0.0.1:8080/REST/queues/jms.queue.testQueue/create
+Connecting to 127.0.0.1:8080... connected.
+HTTP request sent, awaiting response... 201 Created
+Length: 0
+Saving to: `create'
+
+    [ <=>                                                                                                                          ] 0           --.-K/s   in 0s      
+
+2012-10-24 14:49:44 (0.00 B/s) - `create' saved [0/0]
