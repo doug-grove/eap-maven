@@ -58,7 +58,12 @@ public class AS7Client {
 			logger.info("Sent message: " + message.getText());
 
 			// Step 8. Send the Message
-			producer.send(message);
+			Long start = System.currentTimeMillis();
+			for (int i=0; i<1000; i++)
+				producer.send(message);
+			
+			logger.info("elapsed: " + (System.currentTimeMillis() - start));
+			
 		} finally {
 			// Step 19. Be sure to close our JMS resources!
 			if (initialContext != null) {

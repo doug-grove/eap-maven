@@ -27,7 +27,7 @@ public class MessageClient {
 		Properties props = new Properties();
 		props.put(Context.INITIAL_CONTEXT_FACTORY,	"org.jnp.interfaces.NamingContextFactory");
 		props.put(Context.URL_PKG_PREFIXES, "org.jboss.naming:org.jnp.interfaces");
-		props.put(Context.PROVIDER_URL, "10.0.0.150:1100,10.0.0.151:1100");
+		props.put(Context.PROVIDER_URL, "localhost:1099");
 
 		Connection connection = null;
 		InitialContext initialContext = null;
@@ -36,7 +36,7 @@ public class MessageClient {
 			initialContext = new InitialContext(props);
 
 			// Step 2. Perfom a lookup on the queue
-			Queue queue = (Queue) initialContext.lookup("/queue/inQueue");
+			Queue queue = (Queue) initialContext.lookup("/queue/B");
 
 			// Step 3. Perform a lookup on the Connection Factory
 			ConnectionFactory cf = (ConnectionFactory) initialContext.lookup("/ConnectionFactory");
