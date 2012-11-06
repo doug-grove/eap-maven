@@ -36,7 +36,7 @@ public class MessageClient {
 			initialContext = new InitialContext(props);
 
 			// Step 2. Perfom a lookup on the queue
-			Queue queue = (Queue) initialContext.lookup("/queue/B");
+			Queue queue = (Queue) initialContext.lookup("/queue/testQueue");
 
 			// Step 3. Perform a lookup on the Connection Factory
 			ConnectionFactory cf = (ConnectionFactory) initialContext.lookup("/ConnectionFactory");

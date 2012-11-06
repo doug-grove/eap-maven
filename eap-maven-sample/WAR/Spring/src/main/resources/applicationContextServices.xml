@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/jms		http://www.springframework.org/schema/context/spring-jms-3.0.xsd
+    http://www.springframework.org/schema/aop 		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- enable annotations -->
+	<context:annotation-config/>
+	
+	<!-- process annotated beans -->
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+	<!-- this is the Message Driven POJO (MDP) -->
+	<bean id="messageDrivenPOJO" class="org.jboss.sample.war.spring.MessageDrivenPOJO" />
+
+	<!-- a JBoss Messaging queue from JNDI -->
+	<bean id="jbossQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
+     	<property name="jndiName">
+        	<value>queue/testQueue</value>
+     	</property>
+	</bean>
+
+	<!-- a JBoss Messaging ConnectionFactory from JNDI -->
+	<bean id="connectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+     	<property name="jndiName">
+        	<value>JmsXA</value>
+     	</property>
+	</bean>
+
+	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    	<property name="connectionFactory" ref="connectionFactory" />
+    	<property name="destination" ref="jbossQueue" />
+    	<property name="messageListener" ref="messageDrivenPOJO" />
+	</bean>
+	
+	<!-- The IBM MQ Resource Adapter
+	<bean id="resourceAdapter" class="org.springframework.jca.support.ResourceAdapterFactoryBean">
+    	<property name="resourceAdapter">
+        	<bean class="com.ibm.mq.connector.ResourceAdapterImpl">
+        	</bean>
+    	</property>
+    	<property name="workManager">
+        	<bean class="org.springframework.jca.work.SimpleTaskWorkManager"/>
+    	</property>
+	</bean>
+	-->
+	
+	<!-- ************************************** -->
+	<!-- Out bound Connection Factory and Queue -->
+	<!-- ************************************** -->
+	
+	<!-- a IBM MQ queue from JNDI -->
+	<bean id="mqQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
+     	<property name="jndiName">
+        	<value>java:jboss/mqGSS</value>
+     	</property>
+	</bean>
+	
+	<!-- a IBM MQ Connection Factory from JNDI -->
+	<bean id="mqConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+     	<property name="jndiName">
+        	<value>java:jboss/mqConnectionFactory</value>
+     	</property>
+	</bean>
+</beans>

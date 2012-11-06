@@ -59,7 +59,7 @@ public class AS7Client {
 
 			// Step 8. Send the Message
 			Long start = System.currentTimeMillis();
-			for (int i=0; i<1000; i++)
+			for (int i=0; i<10; i++)
 				producer.send(message);
 			
 			logger.info("elapsed: " + (System.currentTimeMillis() - start));

@@ -13,5 +13,6 @@
 	
 	<modules>
 		<module>REST</module>
+		<module>Spring</module>
 	</modules>
 </project>
