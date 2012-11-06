@@ -37,7 +37,7 @@ import org.jboss.logging.Logger;
 //	@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),		
 	@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
 	@ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/B") })
-//@ResourceAdapter("hornetq-ra")
+@ResourceAdapter("hornetq-ra")
 public class MessageConsumer implements MessageListener {
 	private static final Logger logger = Logger.getLogger(MessageConsumer.class);
 	
