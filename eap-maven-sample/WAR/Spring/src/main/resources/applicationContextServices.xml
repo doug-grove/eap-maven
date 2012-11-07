@@ -57,17 +57,19 @@
 	<!-- Out bound Connection Factory and Queue -->
 	<!-- ************************************** -->
 	
-	<!-- a IBM MQ queue from JNDI -->
+	<!-- a IBM MQ queue from JNDI 
 	<bean id="mqQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
      	<property name="jndiName">
         	<value>java:jboss/mqGSS</value>
      	</property>
 	</bean>
+	-->
 	
-	<!-- a IBM MQ Connection Factory from JNDI -->
+	<!-- a IBM MQ Connection Factory from JNDI
 	<bean id="mqConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
      	<property name="jndiName">
         	<value>java:jboss/mqConnectionFactory</value>
      	</property>
 	</bean>
+	-->
 </beans>

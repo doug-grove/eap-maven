@@ -63,7 +63,6 @@ public class AS7Client {
 				producer.send(message);
 			
 			logger.info("elapsed: " + (System.currentTimeMillis() - start));
-			
 		} finally {
 			// Step 19. Be sure to close our JMS resources!
 			if (initialContext != null) {

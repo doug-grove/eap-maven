@@ -77,9 +77,32 @@
 			<artifactId>spring-web</artifactId>
 		</dependency>
 		
+<!--		
 		<dependency>
 			<groupId>com.ibm.mq</groupId>
-			<artifactId>com.ibm.mq.jca.rar</artifactId>
+			<artifactId>com.ibm.mq.jca</artifactId>
+			<type>rar</type>
 		</dependency>
+-->		
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<!-- stop mangling jar names with versions.... -->
+				    <outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>
+					<archive>
+						<manifestEntries>
+<!--
+							<Dependencies>org.hornetq, org.jboss.netty</Dependencies>
+-->							
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

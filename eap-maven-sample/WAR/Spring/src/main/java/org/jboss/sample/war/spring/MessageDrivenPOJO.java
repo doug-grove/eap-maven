@@ -14,7 +14,6 @@ import javax.jms.TextMessage;
 
 import org.jboss.logging.Logger;
 
-
 /**
  * @author grovedc
  *
