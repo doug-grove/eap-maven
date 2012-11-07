@@ -9,6 +9,12 @@
 
 	<description>GSS Maven Sample for JBoss EAP 6 </description>
 
+<!-- 
+
+remove me!
+
+ -->
+
 
 	<properties>
 		<!-- Explicitly declaring the source encoding eliminates the following 
