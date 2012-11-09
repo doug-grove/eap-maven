@@ -14,20 +14,20 @@ import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author grovedc
  *
  */
 public class AS7Client {
-	private static final Logger logger = Logger.getLogger(AS7Client.class);
+	private static final Logger logger = LoggerFactory.getLogger(AS7Client.class);
 
 	public static void main(String[] args) throws Exception {
 		Properties props = new Properties();
 		props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
 		props.put(Context.PROVIDER_URL, "remote://127.0.0.1:4447");
-		
 //		props.put(Context.SECURITY_PRINCIPAL, DEFAULT_USERNAME);
 //      props.put(Context.SECURITY_CREDENTIALS, DEFAULT_PASSWORD);
 

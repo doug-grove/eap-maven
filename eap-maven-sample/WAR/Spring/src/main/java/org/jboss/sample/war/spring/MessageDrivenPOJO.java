@@ -32,7 +32,7 @@ public class MessageDrivenPOJO implements MessageListener {
         if (message instanceof TextMessage) {
         	Connection conn = null;
         	try {
-                logger.debug(((TextMessage)message).getText());
+                logger.info(((TextMessage)message).getText());
                 
 //              InitialContext iniCtx = new InitialContext();
 //        	    Object tmp = iniCtx.lookup("ConnectionFactory");

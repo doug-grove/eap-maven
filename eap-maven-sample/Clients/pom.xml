@@ -20,6 +20,14 @@
 			<version>2.1.0.GA</version>
 		</dependency>
 -->   
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
             
 		<!-- IBM MQ - See README.txt in the Clients test resources folder -->
 		<dependency>

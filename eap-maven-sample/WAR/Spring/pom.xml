@@ -76,14 +76,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
-		
-<!--		
-		<dependency>
-			<groupId>com.ibm.mq</groupId>
-			<artifactId>com.ibm.mq.jca</artifactId>
-			<type>rar</type>
-		</dependency>
--->		
 	</dependencies>
 	
 	<build>
@@ -96,9 +88,7 @@
 				    <outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>
 					<archive>
 						<manifestEntries>
-<!--
-							<Dependencies>org.hornetq, org.jboss.netty</Dependencies>
--->							
+							<Dependencies>deployment.wmq.jmsra.rar</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
