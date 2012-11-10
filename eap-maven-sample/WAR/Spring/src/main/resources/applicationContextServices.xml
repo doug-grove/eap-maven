@@ -16,10 +16,35 @@
 	<context:annotation-config/>
 	
 	<!-- process annotated beans -->
-	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+
+	<!-- ************************************** -->
+	<!-- Out-bound Connection Factory and Queue -->
+	<!-- ************************************** -->
+	
+	<!-- a IBM MQ queue from JNDI -->
+	<bean id="mqSendQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
+     	<property name="jndiName">
+        	<value>java:jboss/mqGSS</value>
+     	</property>
+	</bean>
+	
+	<!-- a IBM MQ Connection Factory from JNDI -->
+	<bean id="mqSendConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+     	<property name="jndiName">
+        	<value>java:jboss/mqConnectionFactory</value>
+     	</property>
+	</bean>
+
+	<!-- *********************************** -->
+	<!-- In-bound Message Driven Components  -->
+	<!-- *********************************** -->
 
 	<!-- this is the Message Driven POJO (MDP) -->
-	<bean id="messageDrivenPOJO" class="org.jboss.sample.war.spring.MessageDrivenPOJO" />
+	<bean id="messageDrivenPOJO" class="org.jboss.sample.war.spring.MessageDrivenPOJO">
+		<property name="queue" ref="mqSendQueue"/>
+		<property name="connectionFactory" ref="mqSendConnectionFactory"/>
+	</bean>
 
 	<!-- The IBM MQ Resource Adapter -->
 	<bean id="mqResourceAdapter" class="org.springframework.jca.support.ResourceAdapterFactoryBean">
@@ -49,23 +74,5 @@
         	</bean>
     	</property>
     	<property name="messageListener" ref="messageDrivenPOJO"/>
-	</bean>
-
-	<!-- ************************************** -->
-	<!-- Out bound Connection Factory and Queue -->
-	<!-- ************************************** -->
-	
-	<!-- a IBM MQ queue from JNDI -->
-	<bean id="mqSendQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
-     	<property name="jndiName">
-        	<value>java:jboss/mqGSS</value>
-     	</property>
-	</bean>
-	
-	<!-- a IBM MQ Connection Factory from JNDI -->
-	<bean id="mqSendConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
-     	<property name="jndiName">
-        	<value>java:jboss/mqConnectionFactory</value>
-     	</property>
 	</bean>
 </beans>
