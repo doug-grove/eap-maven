@@ -22,7 +22,9 @@ import javax.jms.Queue;
 import javax.jms.QueueConnectionFactory;
 import javax.jms.TextMessage;
 
+import org.jboss.ejb3.annotation.Pool;
 import org.jboss.ejb3.annotation.ResourceAdapter;
+import org.jboss.ejb3.annotation.defaults.PoolDefaults;
 import org.jboss.logging.Logger;
 
 /**
@@ -33,10 +35,12 @@ import org.jboss.logging.Logger;
 //	@ActivationConfigProperty(propertyName = "providerAdapterJNDI", propertyValue="java:/RemoteJMSProvider"),
 //  @ActivationConfigProperty(propertyName="reconnectAttempts", propertyValue="60"),
 //  @ActivationConfigProperty(propertyName="reconnectInterval", propertyValue="10"),
-
-//	@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),		
+    @ActivationConfigProperty(propertyName="maxSession", propertyValue="5"),
+        
+        
 	@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
 	@ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/B") })
+@Pool(value=PoolDefaults.POOL_IMPLEMENTATION_STRICTMAX, maxSize=5)
 @ResourceAdapter("hornetq-ra")
 public class MessageConsumer implements MessageListener {
 	private static final Logger logger = Logger.getLogger(MessageConsumer.class);

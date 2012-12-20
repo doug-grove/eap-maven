@@ -15,6 +15,9 @@
 	<!-- enable annotations -->
 	<context:annotation-config/>
 	
+	<!-- Transactions via JTA -->
+	<tx:jta-transaction-manager/> 
+	
 	<!-- process annotated beans -->
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
