@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jboss.sample</groupId>
+		<artifactId>WAR</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<groupId>org.jboss.sample.war.spring</groupId>
+	<artifactId>Spring</artifactId>
+	<packaging>war</packaging>
+
+	<dependencies>
+		<!-- JMS API -->
+		<dependency>
+	  		<groupId>org.jboss.spec.javax.jms</groupId>
+  			<artifactId>jboss-jms-api_1.1_spec</artifactId>
+  			<scope>provided</scope>
+  		</dependency>
+
+		<!-- logging -->
+		<dependency>
+		    <groupId>org.jboss.logging</groupId>
+    		<artifactId>jboss-logging</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+
+		<!-- Spring JMS -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+		</dependency>
+		
+		<!-- Spring Web loading Spring from a WAR file, configuring via web.xml -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<!-- stop mangling jar names with versions.... -->
+				    <outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>
+					<archive>
+						<manifestEntries>
+							<Dependencies>deployment.wmq.jmsra.rar</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

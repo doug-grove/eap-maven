@@ -40,8 +40,8 @@ public class MQWrite {
 	public String hostname = "10.0.0.124";
 	public String channel = "SYSTEM.DEF.SVRCONN";
 	public String qManager = "redhat.queue.manager";
-	public String outputQName = "GSS.BRIDGE.QUEUE";
-//	public String outputQName = "GSS.QUEUE";
+//	public String outputQName = "GSS.BRIDGE.QUEUE";
+	public String outputQName = "GSS.QUEUE";
 
 	public MQWrite() {
 		super();
