@@ -22,7 +22,12 @@
 			<version>${hornetq-rest.version}</version>
 		</dependency>
 
-		<dependency>
+  		<dependency>
+       		<groupId>org.hornetq</groupId>
+       		<artifactId>hornetq-core-client</artifactId>
+       		<version>2.2.19.Final</version>
+    	</dependency>
+   		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty</artifactId>
 			<version>3.4.5.Final</version>
