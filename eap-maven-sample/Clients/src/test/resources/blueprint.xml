@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+        xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0">
+
+        <!-- Add bean definition for activemq - -->
+        <bean id="jmsConnectionFactory-producer" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="failover:ssl://epsilon.adcom.uci.edu:61617"/>
+        <property name="userName" value="OIRProducer"/>
+        <property name="password" value="secret"/>
+    </bean>
+
+    <bean id="jmsConnectionFactory-consumer" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="failover:ssl://delta.adcom.uci.edu:61617"/>
+        <property name="userName" value="OIRConsumer"/>
+        <property name="password" value="secret1"/>
+    </bean>
+    
+    <bean id="jms-producer" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="connectionFactory" ref="jmsConnectionFactory-producer" />
+    </bean>
+    
+    <bean id="jms-consumer" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="connectionFactory" ref="jmsConnectionFactory-consumer" />
+    </bean>
+    
+    <bean id="myFilter" class="edu.uci.oirpoc.RegistrarFileFilter"/>
+
+    <!-- Add Dead Letter Error Handler to Camel Route - -->
+    <bean id="oirPocDeadLetterErrorHandler" class="org.apache.camel.builder.DeadLetterChannelBuilder">
+        <property name="deadLetterUri" value="jms:queue:RegtoOir.retry.fail.DLQ"/>
+        <property name="redeliveryPolicy" ref="ucpsidmsRedeliveryPolicyConfig"/>
+    </bean>
+
+    <!--  If on windows get userid from command 'echo %username%' -->
+    <!--  ********** Starting of Camel Context  ********** -->
+    <camelContext trace="true" id="UCI-OIRFILE-DISPATCHER" xmlns="http://camel.apache.org/schema/blueprint">
+       <route errorHandlerRef="oirPocDeadLetterErrorHandler" id="UCI-OirDataDistributor">
+           <from uri="sftp://esbxfr@nka.reg.uci.edu?password=secret3&amp;noop=true&amp;delay=600000&amp;filter=#myFilter"/>
+           <to uri="{{oirOut}}"/>
+           <log message="regOirFile: get file from sftp drop it in mq">
+              <description>&lt;to sftp destination/&gt;</description>
+           </log>
+       </route>
+       <route errorHandlerRef="oirPocDeadLetterErrorHandler" id="UCI-OirFileDistributor-r2">
+           <from uri="jms-consumer:queue:OIR.FROM_REGISTRAR"/>
+           <to uri="{{fileOut}}"/>
+           <log message="regOirFile: get file from q and drop it in file location">
+               <description>&lt;to sftp destination/&gt;</description>
+           </log>
+       </route>
+	</camelContext>
+
+</blueprint>

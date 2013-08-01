@@ -37,8 +37,8 @@ public class AS7Client {
 			// Step 1. Create an initial context to perform the JNDI lookup.
 			initialContext = new InitialContext(props);
 
-			// Step 2. Perfom a lookup on the queue
-			Queue queue = (Queue)initialContext.lookup("/jms/testQueue");
+			// Step 2. Perform a lookup on the queue
+			Queue queue = (Queue)initialContext.lookup("jms/queue/test");
 
 			// Step 3. Perform a lookup on the Connection Factory
 			ConnectionFactory cf = (ConnectionFactory)initialContext.lookup("jms/RemoteConnectionFactory");

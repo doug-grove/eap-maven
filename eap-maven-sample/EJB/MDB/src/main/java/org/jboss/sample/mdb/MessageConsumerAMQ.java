@@ -1,11 +1,3 @@
-/**
- * MessageConsumer.java
- * 
- * Created on Mar 19, 2011, 3:04:11 PM
- *
- * Copyright (C) 2011 Red Hat Inc. - GSS
- * All rights reserved.
- */
 package org.jboss.sample.mdb;
 
 import javax.annotation.PostConstruct;
@@ -22,32 +14,26 @@ import javax.jms.Queue;
 import javax.jms.QueueConnectionFactory;
 import javax.jms.TextMessage;
 
-import org.jboss.ejb3.annotation.Pool;
 import org.jboss.ejb3.annotation.ResourceAdapter;
-import org.jboss.ejb3.annotation.defaults.PoolDefaults;
 import org.jboss.logging.Logger;
 
 /**
  * @author grovedc
  * 
  */
-@MessageDriven(name="MessageConsumer", activationConfig = {
-    @ActivationConfigProperty(propertyName = "reconnectAttempts", propertyValue="100"),
-    @ActivationConfigProperty(propertyName = "reconnectInterval", propertyValue="10"),
-    @ActivationConfigProperty(propertyName = "maxSession", propertyValue="30"),
+@MessageDriven(name="MessageConsumerAMQ", activationConfig = {
 	@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-	@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:/queue/B") })
+	@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:/queue/amq1") })
 
-@ResourceAdapter("hornetq-ra")
-@Pool(value=PoolDefaults.POOL_IMPLEMENTATION_STRICTMAX, maxSize=30, timeout=1800000)
-public class MessageConsumer implements MessageListener {
-	private static final Logger logger = Logger.getLogger(MessageConsumer.class);
+@ResourceAdapter("activemq-rar-5.8.0.redhat-60024-eap6")
+public class MessageConsumerAMQ implements MessageListener {
+	private static final Logger logger = Logger.getLogger(MessageConsumerAMQ.class);
 
-	@Resource(mappedName = "java:/ConnectionFactory")
-	private QueueConnectionFactory queueConnectionFactory;
-
-	@Resource(mappedName = "java:/queue/A")
-	private Queue queue;
+//	@Resource(mappedName = "java:/ConnectionFactoryAMQ")
+//	private QueueConnectionFactory queueConnectionFactory;
+//
+//	@Resource(mappedName = "java:/queue/amqA")
+//	private Queue queue;
 	
 	/* (non-Javadoc)
 	 * @see javax.jms.MessageListener#onMessage(javax.jms.Message)
@@ -57,11 +43,11 @@ public class MessageConsumer implements MessageListener {
 			if (message instanceof TextMessage)
 				logger.info(((TextMessage)message).getText());
 			
-			if (queueConnectionFactory != null)
-				logger.debug("CF injected");
-			
-			if (queue != null)
-				logger.debug("queue injected");
+//			if (queueConnectionFactory != null)
+//				logger.debug("CF injected");
+//			
+//			if (queue != null)
+//				logger.debug("queue injected");
 			
 		} catch (JMSException e) {
 			logger.error(e.getMessage());

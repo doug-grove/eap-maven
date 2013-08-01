@@ -40,16 +40,16 @@ import org.jboss.logging.Logger;
  * @author grovedc
  * 
  */
-@MessageDriven(name = "WebSphereMQM", activationConfig = {
+@MessageDriven(name = "WebSphereMQ", activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
 		@ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "false"),
-		@ActivationConfigProperty(propertyName = "hostName", propertyValue = "10.0.0.124"),
+		@ActivationConfigProperty(propertyName = "hostName", propertyValue = "10.0.0.150"),
 		@ActivationConfigProperty(propertyName = "port", propertyValue = "1414"),
 		@ActivationConfigProperty(propertyName = "channel", propertyValue = "SYSTEM.DEF.SVRCONN"),
-		@ActivationConfigProperty(propertyName = "queueManager", propertyValue = "redhat.queue.manager"),
+		@ActivationConfigProperty(propertyName = "queueManager", propertyValue = "REDHAT.QUEUE.MANAGER"),
 		@ActivationConfigProperty(propertyName = "destination", propertyValue = "GSS.QUEUE"),
 		@ActivationConfigProperty(propertyName = "transportType", propertyValue = "CLIENT") })
-@ResourceAdapter(value = "wmq.jmsra.rar")
+@ResourceAdapter(value = "wmq.jmsra-7.5.rar")
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class WebSphereMQ implements MessageListener {
 	private static final Logger logger = Logger.getLogger(WebSphereMQ.class);

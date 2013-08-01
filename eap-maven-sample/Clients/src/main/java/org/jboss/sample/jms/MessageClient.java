@@ -27,7 +27,7 @@ public class MessageClient {
 		Properties props = new Properties();
 		props.put(Context.INITIAL_CONTEXT_FACTORY,	"org.jnp.interfaces.NamingContextFactory");
 		props.put(Context.URL_PKG_PREFIXES, "org.jboss.naming:org.jnp.interfaces");
-		props.put(Context.PROVIDER_URL, "localhost:1099");
+		props.put(Context.PROVIDER_URL, "10.0.0.150:1099");
 
 		Connection connection = null;
 		InitialContext initialContext = null;
@@ -36,10 +36,10 @@ public class MessageClient {
 			initialContext = new InitialContext(props);
 
 			// Step 2. Perfom a lookup on the queue
-			Queue queue = (Queue) initialContext.lookup("/queue/testQueue");
+			Queue queue = (Queue) initialContext.lookup("/queue/A");
 
 			// Step 3. Perform a lookup on the Connection Factory
-			ConnectionFactory cf = (ConnectionFactory) initialContext.lookup("/ConnectionFactory");
+			ConnectionFactory cf = (ConnectionFactory) initialContext.lookup("/a-mqInitialContext");
 
 			// Step 4.Create a JMS Connection
 			connection = cf.createConnection();
@@ -64,7 +64,7 @@ public class MessageClient {
 			// Step 16. We create a JMS message consumer
 			MessageConsumer messageConsumer = session.createConsumer(queue);
 
-			// Step 17. We start the connedction so we can receive messages
+			// Step 17. We start the connection so we can receive messages
 			connection.start();
 
 			// Step 18. We receive the message and print it out

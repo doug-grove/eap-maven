@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:ejb="http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd"
+	version="3.0">
+
+	<enterprise-beans>
+		<message-driven>
+			<ejb-name>ExternalConfXML</ejb-name>
+			<ejb-class>org.jboss.sample.mq.ExternalConfXML</ejb-class>
+			<transaction-type>Bean</transaction-type>
+			<activation-config>
+				<activation-config-property>
+					<activation-config-property-name>useJNDI</activation-config-property-name>
+					<activation-config-property-value>true</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>destination</activation-config-property-name>
+					<activation-config-property-value>java:/jms/mqGSS</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>destinationType</activation-config-property-name>
+					<activation-config-property-value>javax.jms.Queue</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>subscriptionDurability</activation-config-property-name>
+					<activation-config-property-value>durable</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>maxMessages</activation-config-property-name>
+					<activation-config-property-value>1</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>maxPoolDepth</activation-config-property-name>
+					<activation-config-property-value>1</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>hostName</activation-config-property-name>
+					<activation-config-property-value>10.0.0.150</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>queueManager</activation-config-property-name>
+					<activation-config-property-value>REDHAT.QUEUE.MANAGER</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>port</activation-config-property-name>
+					<activation-config-property-value>1414</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>channel</activation-config-property-name>
+					<activation-config-property-value>SYSTEM.DEF.SVRCONN</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>
+		</message-driven>
+
+		<message-driven>
+			<ejb-name>ConfFromAdminObjects</ejb-name>
+			<ejb-class>org.jboss.sample.mq.ConfFromAdminObjects</ejb-class>
+			<transaction-type>Bean</transaction-type>
+			<activation-config>
+<!--
+				<activation-config-property>
+					<activation-config-property-name>destination</activation-config-property-name>
+					<activation-config-property-value>java:/jms/mqGSS</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>destinationType</activation-config-property-name>
+					<activation-config-property-value>javax.jms.Queue</activation-config-property-value>
+				</activation-config-property>
+-->				
+				<activation-config-property>
+					<activation-config-property-name>hostName</activation-config-property-name>
+					<activation-config-property-value>10.0.0.150</activation-config-property-value>
+				</activation-config-property>		
+				<activation-config-property>
+					<activation-config-property-name>useJNDI</activation-config-property-name>
+					<activation-config-property-value>true</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>queueManager</activation-config-property-name>
+					<activation-config-property-value>REDHAT.QUEUE.MANAGER</activation-config-property-value>
+				</activation-config-property>
+<!--				
+				<activation-config-property>
+					<activation-config-property-name>port</activation-config-property-name>
+					<activation-config-property-value>1414</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>channel</activation-config-property-name>
+					<activation-config-property-value>SYSTEM.DEF.SVRCONN</activation-config-property-value>
+				</activation-config-property>
+-->				
+			</activation-config>
+		</message-driven>
+	</enterprise-beans>
+
+	<assembly-descriptor />
+</ejb-jar>
