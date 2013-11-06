@@ -23,9 +23,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-import org.jboss.ejb3.annotation.Pool;
 import org.jboss.ejb3.annotation.ResourceAdapter;
-import org.jboss.ejb3.annotation.defaults.PoolDefaults;
 import org.jboss.logging.Logger;
 
 /**
@@ -37,12 +35,10 @@ import org.jboss.logging.Logger;
  * 
  */
 @MessageDriven(name="ActiveMQ", activationConfig = {
-   @ActivationConfigProperty(propertyName = "maxSessions", propertyValue="30"),
    @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-   @ActivationConfigProperty(propertyName = "destination", propertyValue = "/queue/B") })
+   @ActivationConfigProperty(propertyName = "destination", propertyValue = " java:/activemq/queue_in") })
 
-@ResourceAdapter("activemq-5.5.1.fuse-70-097.rar")
-@Pool(value=PoolDefaults.POOL_IMPLEMENTATION_STRICTMAX, maxSize=30, timeout=1800000)
+@ResourceAdapter("activemq-rar-5.8.0.redhat-60024.rar")
 public class ActiveMQ implements MessageListener {
     private static final Logger logger = Logger.getLogger(ActiveMQ.class);
     

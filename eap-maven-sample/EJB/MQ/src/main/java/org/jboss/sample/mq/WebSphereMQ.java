@@ -41,6 +41,9 @@ import org.jboss.logging.Logger;
  * 
  */
 @MessageDriven(name = "WebSphereMQ", activationConfig = {
+        @ActivationConfigProperty(propertyName = "maxSession", propertyValue="30"),
+        @ActivationConfigProperty(propertyName = "maxPoolDepth", propertyValue="30"),
+        @ActivationConfigProperty(propertyName = "maxMessages", propertyValue="5"),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
 		@ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "false"),
 		@ActivationConfigProperty(propertyName = "hostName", propertyValue = "10.0.0.150"),
@@ -49,7 +52,7 @@ import org.jboss.logging.Logger;
 		@ActivationConfigProperty(propertyName = "queueManager", propertyValue = "REDHAT.QUEUE.MANAGER"),
 		@ActivationConfigProperty(propertyName = "destination", propertyValue = "GSS.QUEUE"),
 		@ActivationConfigProperty(propertyName = "transportType", propertyValue = "CLIENT") })
-@ResourceAdapter(value = "wmq.jmsra-7.5.rar")
+@ResourceAdapter(value="wmq.jmsra.rar")
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class WebSphereMQ implements MessageListener {
 	private static final Logger logger = Logger.getLogger(WebSphereMQ.class);
@@ -64,7 +67,7 @@ public class WebSphereMQ implements MessageListener {
 			logger.debug("Received message: " + message.getJMSMessageID() + " : " + ((TextMessage)message).getText());
 			
 			// **** test some lookups....
-			lookup();
+//			lookup();
 		} catch (JMSException e) {
 			logger.error(e.getMessage());
 		}
@@ -80,7 +83,11 @@ public class WebSphereMQ implements MessageListener {
 		logger.info("Entering/Exiting ejbRemove");
 	} 
 	
-	private void lookup() {
+	/**
+	 * 
+	 */
+	@SuppressWarnings("unused")
+    private void lookup() {
 		logger.info("Entering lookup");
 		
 	    try {
@@ -98,7 +105,6 @@ public class WebSphereMQ implements MessageListener {
 			Session session = conn.createSession(false, QueueSession.AUTO_ACKNOWLEDGE);
 
 			logger.info("Creating message producer");
-			@SuppressWarnings("unused")
 			MessageProducer producer = session.createProducer(queue);
 			
 			session.close();
@@ -109,7 +115,6 @@ public class WebSphereMQ implements MessageListener {
 			logger.error(e);
 		}		
 
-		
 		logger.info("Exiting lookup");
 	}
 }

@@ -38,7 +38,7 @@ public class AS7Client {
 			initialContext = new InitialContext(props);
 
 			// Step 2. Perform a lookup on the queue
-			Queue queue = (Queue)initialContext.lookup("jms/queue/test");
+			Queue queue = (Queue)initialContext.lookup("/queue/testDistributedQueue");
 
 			// Step 3. Perform a lookup on the Connection Factory
 			ConnectionFactory cf = (ConnectionFactory)initialContext.lookup("jms/RemoteConnectionFactory");
@@ -59,7 +59,7 @@ public class AS7Client {
 
 			// Step 8. Send the Message
 			Long start = System.currentTimeMillis();
-			for (int i=0; i<10; i++)
+			for (int i=0; i<4; i++)
 				producer.send(message);
 			
 			logger.info("elapsed: " + (System.currentTimeMillis() - start));
