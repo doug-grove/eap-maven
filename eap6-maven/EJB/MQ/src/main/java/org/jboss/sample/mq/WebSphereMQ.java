@@ -33,6 +33,7 @@ import javax.jms.TextMessage;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.jboss.ejb3.annotation.Pool;
 import org.jboss.ejb3.annotation.ResourceAdapter;
 import org.jboss.logging.Logger;
 
@@ -41,18 +42,22 @@ import org.jboss.logging.Logger;
  * 
  */
 @MessageDriven(name = "WebSphereMQ", activationConfig = {
-        @ActivationConfigProperty(propertyName = "maxSession", propertyValue="30"),
-        @ActivationConfigProperty(propertyName = "maxPoolDepth", propertyValue="30"),
-        @ActivationConfigProperty(propertyName = "maxMessages", propertyValue="5"),
+        @ActivationConfigProperty(propertyName = "maxPoolDepth", propertyValue="3"),
+        @ActivationConfigProperty(propertyName = "maxMessages", propertyValue="1"),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
 		@ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "false"),
-		@ActivationConfigProperty(propertyName = "hostName", propertyValue = "10.0.0.150"),
-		@ActivationConfigProperty(propertyName = "port", propertyValue = "1414"),
+//		@ActivationConfigProperty(propertyName = "hostName", propertyValue = "10.0.0.150"),
+		@ActivationConfigProperty(propertyName = "hostName", propertyValue = "10.10.178.20"),
+		@ActivationConfigProperty(propertyName = "port", propertyValue = "1415"),
+		@ActivationConfigProperty(propertyName = "userName", propertyValue = "redhat"),
+		@ActivationConfigProperty(propertyName = "password", propertyValue = "redhat"),
 		@ActivationConfigProperty(propertyName = "channel", propertyValue = "SYSTEM.DEF.SVRCONN"),
-		@ActivationConfigProperty(propertyName = "queueManager", propertyValue = "REDHAT.QUEUE.MANAGER"),
+		@ActivationConfigProperty(propertyName = "queueManager", propertyValue = "GSS.QUEUE.MANAGER"),
 		@ActivationConfigProperty(propertyName = "destination", propertyValue = "GSS.QUEUE"),
 		@ActivationConfigProperty(propertyName = "transportType", propertyValue = "CLIENT") })
-@ResourceAdapter(value="wmq.jmsra.rar")
+
+@Pool(value="MQpool") 
+@ResourceAdapter(value="wmq.jmsra.7.5.0.3.rar")
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class WebSphereMQ implements MessageListener {
 	private static final Logger logger = Logger.getLogger(WebSphereMQ.class);

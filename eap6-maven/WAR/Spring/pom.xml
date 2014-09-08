@@ -36,6 +36,15 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
+	
+		<!-- IBM MQ RAR
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>wmq.jmsra</artifactId>
+			<type>rar</type>
+			<scope>provided</scope>
+		</dependency>
+-->		
 	</dependencies>
 	
 	<build>
@@ -48,7 +57,7 @@
 				    <outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>
 					<archive>
 						<manifestEntries>
-							<Dependencies>deployment.wmq.jmsra.rar</Dependencies>
+							<Dependencies>deployment.wmq.jmsra.7.5.02.rar</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>

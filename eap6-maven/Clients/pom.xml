@@ -42,6 +42,10 @@
 			<groupId>com.ibm.mq</groupId>
 			<artifactId>com.ibm.mq.jta</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.ibm.mq</groupId>
+			<artifactId>com.ibm.mq.jmqi</artifactId>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.jboss.javaee</groupId>
@@ -80,6 +84,19 @@
     	<dependency>
         	<groupId>org.jboss.netty</groupId>
         	<artifactId>netty</artifactId>
-    	</dependency>  		
+    	</dependency>  	
+    	
+        <dependency>
+      		<groupId>org.apache.activemq</groupId>
+      		<artifactId>activemq-client</artifactId>
+      		<version>5.9.0.redhat-610379</version>
+    	</dependency>
+    
+         <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+            <version>5.0.1</version>
+            <type>jar</type>
+        </dependency>	
 	</dependencies>
 </project>

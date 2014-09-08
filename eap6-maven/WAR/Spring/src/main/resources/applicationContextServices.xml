@@ -1,44 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jms="http://www.springframework.org/schema/jms"
-	xsi:schemaLocation="
-	http://www.springframework.org/schema/beans 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-	http://www.springframework.org/schema/tx		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-	http://www.springframework.org/schema/context	http://www.springframework.org/schema/context/spring-context-3.0.xsd
-	http://www.springframework.org/schema/jms		http://www.springframework.org/schema/context/spring-jms-3.0.xsd
-    http://www.springframework.org/schema/aop 		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- enable annotations -->
 	<context:annotation-config/>
 	
-	<!-- Transactions via JTA -->
-	<tx:jta-transaction-manager/> 
-	
 	<!-- process annotated beans -->
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
-
+	
+	<!-- JTA TX Manager --> 
+	<bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager"/>
+		
 	<!-- ************************************** -->
 	<!-- Out-bound Connection Factory and Queue -->
 	<!-- ************************************** -->
 	
 	<!-- a IBM MQ queue from JNDI -->
-	<bean id="mqSendQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
-     	<property name="jndiName">
-        	<value>java:jboss/mqGSS</value>
-     	</property>
-	</bean>
+	<jee:jndi-lookup id="mqSendQueue" jndi-name="java:/jms/wmqQueue"/>
 	
 	<!-- a IBM MQ Connection Factory from JNDI -->
-	<bean id="mqSendConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
-     	<property name="jndiName">
-        	<value>java:jboss/mqConnectionFactory</value>
-     	</property>
+	<jee:jndi-lookup id="mqSendConnectionFactory" jndi-name="java:/jms/wmqCF"/>
+	
+	<!--  JMS TX Manager -->
+	<bean id="jmsTransactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
+    	<property name="connectionFactory" ref="mqSendConnectionFactory" />
 	</bean>
-
+	
+	<!-- A template for sending messages -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    	<property name="connectionFactory" ref="mqSendConnectionFactory"/>
+    	<!-- the following properties are most likely not used in JBoss  -->
+    	<property name="sessionTransacted" value="true"/>
+    	<property name="sessionAcknowledgeMode" value="0"/>
+	</bean>
+	
 	<!-- *********************************** -->
 	<!-- In-bound Message Driven Components  -->
 	<!-- *********************************** -->
@@ -46,7 +52,8 @@
 	<!-- this is the Message Driven POJO (MDP) -->
 	<bean id="messageDrivenPOJO" class="org.jboss.sample.war.spring.MessageDrivenPOJO">
 		<property name="queue" ref="mqSendQueue"/>
-		<property name="connectionFactory" ref="mqSendConnectionFactory"/>
+		<property name="jmsTemplate" ref="jmsTemplate"/>
+		<constructor-arg value="txManager" index="0" type="org.springframework.transaction.jta.JtaTransactionManager"/>
 	</bean>
 
 	<!-- The IBM MQ Resource Adapter -->
@@ -65,11 +72,12 @@
 	<!-- Configure the messaging end point -->
 	<bean class="org.springframework.jms.listener.endpoint.JmsMessageEndpointManager">
     	<property name="resourceAdapter" ref="mqResourceAdapter"/>
-   		 <property name="activationSpec">
+     	<property name="transactionManager" ref="txManager"/>
+   		<property name="activationSpec">
         	<bean class="com.ibm.mq.connector.inbound.ActivationSpecImpl">
            		<property name="destination" value="GSS.QUEUE"/>
            		<property name="destinationType" value="javax.jms.Queue"/>
-           		<property name="hostName" value="10.0.0.124"/>
+           		<property name="hostName" value="10.0.0.150"/>
            		<property name="port" value="1414"/>
        			<property name="channel" value="SYSTEM.DEF.SVRCONN"/>
                	<property name="transportType" value="CLIENT"/>
