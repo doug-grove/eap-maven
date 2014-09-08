@@ -30,7 +30,7 @@
 		<!-- Spring -->
 		<!-- <spring.version>2.5.6.SEC02</spring.version> -->
 		<!--  need a newer Spring ... -->
-		<spring.version>3.2.2.RELEASE</spring.version>
+		<spring.version>3.2.8.RELEASE</spring.version>
 		
 		<!-- working logging... -->
 		<slf4j.version>1.6.3</slf4j.version>
@@ -94,24 +94,32 @@
 			<dependency>
 				<groupId>com.ibm.mq</groupId>
 				<artifactId>com.ibm.mq</artifactId>
-				<version>6.0.2.10</version>
+				<version>7.5.0.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.ibm.mq</groupId>
 				<artifactId>com.ibm.mq.connector</artifactId>
-				<version>6.0.2.10</version>
+				<version>7.5.0.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.ibm.mq</groupId>
 				<artifactId>com.ibm.mq.jta</artifactId>
-				<version>6.0.2.10</version>
+				<version>7.5.0.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.ibm.mq</groupId>
-				<artifactId>com.ibm.mq.jca</artifactId>
-				<version>6.0.2.10</version>
-				<type>rar</type>
+				<artifactId>com.ibm.mq.jmqi</artifactId>
+				<version>7.5.0.2</version>
 			</dependency>
+<!--
+			<dependency>
+				<groupId>com.ibm.mq</groupId>
+				<artifactId>wmq.jmsra</artifactId>
+				<version>7.5.0.2</version>
+				<type>rar</type>
+				<scope>provided</scope>
+			</dependency>
+-->	
 			
 			<!-- Client dependencies -->
 			<dependency>
